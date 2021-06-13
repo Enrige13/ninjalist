@@ -1,7 +1,8 @@
 // localhost:3000/folder/ - creates root path only with (index.js)
 import styles from '../../styles/Jobs.module.css'
+import Link from 'next/link'
 
-export const getStaticProps = async () => { // run at build time - before component is rendered, never write code witch renders in the browser
+export const getStaticProps = async () => { // run at build time - before component (Ninjas) is rendered, never write code witch renders in the browser
   const res = await fetch('https://jsonplaceholder.typicode.com/users') // await because it is async
   const data = await res.json()
 
@@ -17,11 +18,11 @@ const Ninjas = ({ ninjas }) => {
     <div>
       <h1>All Ninjas</h1>
       {ninjas.map(ninja => (
-        <div key={ninja.id}>
+        <Link href={'/ninjas/' + ninja.id} key={ninja.id}>
           <a className={styles.single}>
             <h3>{ ninja.name }</h3>
           </a>
-        </div>
+        </Link>
       ))}
     </div>
   )
